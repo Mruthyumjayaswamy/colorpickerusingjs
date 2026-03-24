@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Employee Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+            padding: 20px;
+        }
+        .container {
+            width: 400px;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px gray;
+            margin-bottom: 20px;
+        }
+        label {
+            font-weight: bold;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            border-radius: 5px;
+            border: 1px solid gray;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            background: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th {
+            background: #007bff;
+            color: white;
+        }
+        td, th {
+            padding: 10px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h2>Employee Registration</h2>
+
+        <label>Name:</label>
+        <input type="text" id="empName">
+
+        <label>Age:</label>
+        <input type="number" id="empAge">
+
+        <label>Department:</label>
+        <input type="text" id="empDept">
+
+        <label>Salary:</label>
+        <input type="number" id="empSalary">
+
+        <button onclick="addEmployee()">Submit</button>
+    </div>
+
+    <h2>Employee Details</h2>
+
+    <table id="empTable">
+        <tr>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Dept</th>
+            <th>Salary</th>
+        </tr>
+    </table>
+
+<script>
+    // Array to store employee objects
+    let employees = [];
+
+    function addEmployee() {
+        let name = document.getElementById("empName").value;
+        let age = document.getElementById("empAge").value;
+        let dept = document.getElementById("empDept").value;
+        let salary = document.getElementById("empSalary").value;
+
+        if (name === "" || age === "" || dept === "" || salary === "") {
+            alert("Please fill all fields!");
+            return;
+        }
+
+        // Create Employee Object
+        let employee = {
+            name: name,
+            age: age,
+            dept: dept,
+            salary: salary
+        };
+
+        // Add to array
+        employees.push(employee);
+
+        // Update table
+        displayTable();
+
+        // Clear fields
+        document.getElementById("empName").value = "";
+        document.getElementById("empAge").value = "";
+        document.getElementById("empDept").value = "";
+        document.getElementById("empSalary").value = "";
+    }
+
+    function displayTable() {
+        let table = document.getElementById("empTable");
+
+        table.innerHTML = `
+            <tr>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Dept</th>
+                <th>Salary</th>
+            </tr>
+        `;
+
+        employees.forEach(emp => {
+            table.innerHTML += `
+                <tr>
+                    <td>${emp.name}</td>
+                    <td>${emp.age}</td>
+                    <td>${emp.dept}</td>
+                    <td>${emp.salary}</td>
+                </tr>
+            `;
+        });
+    }
+</script>
+
+</body>
+</html>
